@@ -28,6 +28,7 @@ public func configure(_ app: Application) async throws {
     
     // MARK: - JWT
     app.jwt.signers.use(.hs256(key: "secretkey"))
+    
 
     // MARK: - Routes
     try routes(app)
