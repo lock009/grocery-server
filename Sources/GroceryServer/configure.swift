@@ -4,22 +4,31 @@ import FluentPostgresDriver
 import Vapor
 import JWT
 
-// configures your application
 public func configure(_ app: Application) async throws {
-    
-     app.databases.use(.postgres(configuration: SQLPostgresConfiguration(hostname: "localhost", username: "postgres", password: "", database: "grocerydb", tls: .prefer(try .init(configuration: .clientDefault)))), as: .psql)
 
-    
+    // MARK: - PostgreSQL for Render
+    if let databaseURL = Environment.get("DATABASE_URL") {
+        // Render provides a full connection URL
+        try app.databases.use(.postgres(url: databaseURL), as: .psql)
+    } else {
+        // Local development fallback
+        app.databases.use(.postgres(configuration: SQLPostgresConfiguration(hostname: "localhost", username: "postgres", password: "", database: "grocerydb", tls: .prefer(try .init(configuration: .clientDefault)))), as: .psql)
+
+    }
+
+    // MARK: - Migrations
     app.migrations.add(CreateUserTableMigrations())
     app.migrations.add(FixQuantityType())
     app.migrations.add(CreateGroceryCategoryTableMigration())
     app.migrations.add(CreateGroceryItemTableMigration())
     
-                       
+    // MARK: - Controllers
     try app.register(collection: UserController())
     try app.register(collection: GroceryController())
     
+    // MARK: - JWT
     app.jwt.signers.use(.hs256(key: "secretkey"))
-    // register routes
+
+    // MARK: - Routes
     try routes(app)
 }
