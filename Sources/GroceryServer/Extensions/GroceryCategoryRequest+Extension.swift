@@ -6,3 +6,9 @@
 //
 
 import Foundation
+import Vapor
+import GroceryAppSharedModels
+
+extension GroceryCategoryRequest : Content , @unchecked Sendable{
+    
+}

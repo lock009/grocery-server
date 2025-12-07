@@ -5,4 +5,9 @@
 //  Created by Rajveer Mann on 12/11/25.
 //
 
-import Foundation
+import Vapor
+import GroceryAppSharedModels
+
+extension LoginResponse : Content ,@unchecked Sendable{
+    
+}
