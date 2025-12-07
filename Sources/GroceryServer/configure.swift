@@ -21,7 +21,7 @@ public func configure(_ app: Application) async throws {
     app.migrations.add(FixQuantityType())
     app.migrations.add(CreateGroceryCategoryTableMigration())
     app.migrations.add(CreateGroceryItemTableMigration())
-    
+    try await app.autoMigrate()
     // MARK: - Controllers
     try app.register(collection: UserController())
     try app.register(collection: GroceryController())
