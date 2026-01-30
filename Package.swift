@@ -16,7 +16,7 @@ let package = Package(
         // 🔵 Non-blocking, event-driven networking for Swift. Used for custom executors
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
         
-            .package(url: "https://github.com/vapor/jwt.git", from: "4.2.2"),
+         
             .package(url: "https://github.com/lock009/GrocerySharedModels.git", branch: "main"),
 
     ],
