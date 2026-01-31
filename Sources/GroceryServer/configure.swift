@@ -27,8 +27,8 @@ public func configure(_ app: Application) async throws {
     try app.register(collection: GroceryController())
     
     // MARK: - JWT
-    app.jwt.signers.use(.hs256(key: "secretkey"))
-    
+    await app.jwt.keys.add(hmac: "secretkey", digestAlgorithm: .sha256)
+
 
     // MARK: - Routes
     try routes(app)

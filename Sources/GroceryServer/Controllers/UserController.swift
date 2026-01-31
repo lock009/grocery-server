@@ -37,7 +37,7 @@ struct UserController: RouteCollection {
             expiration: .init(value: .distantFuture),userId:  existingUser.requireID()
         )
         
-        let token = try req.jwt.sign(payload)
+        let token = try await req.jwt.sign(payload)
         
         return LoginResponse(
             error: false,

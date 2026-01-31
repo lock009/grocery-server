@@ -14,9 +14,10 @@ struct AuthPayload : JWTPayload {
     var expiration : ExpirationClaim
     var userId : UUID
     
-    func verify(using signer: JWTKit.JWTSigner) throws {
+    func verify(using algorithm: some JWTAlgorithm) async throws {
         try expiration.verifyNotExpired()
     }
+
     
     
 }

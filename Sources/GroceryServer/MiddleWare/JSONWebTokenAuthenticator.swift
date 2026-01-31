@@ -12,7 +12,7 @@ import Foundation
 struct JSONWebTokenAuthenticator : AsyncRequestAuthenticator {
     
     func authenticate(request : Request) async throws {
-        try request.jwt.verify(as : AuthPayload.self)
+        try await request.jwt.verify(as : AuthPayload.self)
     }
 }
 
